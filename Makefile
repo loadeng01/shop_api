@@ -7,3 +7,8 @@ migrate:
 
 superuser:
 	python3 manage.py createsuperuser
+
+added:
+	git add .
+	git commit -m 'done'
+	git push origin master
