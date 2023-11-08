@@ -56,8 +56,23 @@ class RegistrationPhoneView(GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        send_activation_sms(user.phone_number, user.activation_code)
+        send_activation_sms(user.phone_number, user.activation_phone_code)
         return Response(serializer.data, status=201)
+
+
+class ActivationPhoneView(APIView):
+    def post(self, request):
+        phone = request.data.get('phone_number')
+        code = request.data.get('activation_phone_code')
+        user = User.objects.filter(phone_number=phone, activation_phone_code=code).first()
+        if not user:
+            return Response('No such user', status=400)
+        user.activation_phone_code = ''
+        user.is_phone_active = True
+        user.save()
+        return Response('Successfully activated', status=200)
+
+
 
 
 
