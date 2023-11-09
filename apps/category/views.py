@@ -14,6 +14,3 @@ class CategoryViewSet(ModelViewSet):
             return permissions.AllowAny(),
         return permissions.IsAdminUser(),
 
-
-
-
