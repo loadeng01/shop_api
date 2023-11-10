@@ -6,9 +6,10 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework import generics
 from django.contrib.auth import get_user_model
-from .send_mail import send_confirmation_email
+# from .send_mail import send_confirmation_email
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .send_sms import send_activation_sms
+# from .send_sms import send_activation_sms
+from .tests import send_confirmation_email, send_activation_sms
 
 User = get_user_model()
 
@@ -22,7 +23,7 @@ class RegistrationView(APIView):
         user = serializer.save()
         if user:
             try:
-                send_confirmation_email(user.email, user.activation_code)
+                send_confirmation_email.delay(user.email, user.activation_code)
             except:
                 return Response({'message': 'Registered, but trouble with email',
                                  'data': serializer.data}, status=201)
@@ -56,7 +57,7 @@ class RegistrationPhoneView(GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        send_activation_sms(user.phone_number, user.activation_phone_code)
+        send_activation_sms.delay(user.phone_number, user.activation_phone_code)
         return Response(serializer.data, status=201)
 
 
