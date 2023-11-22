@@ -13,7 +13,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     status = serializers.CharField(read_only=True)
     user = serializers.ReadOnlyField(source='user.email')
-    product = OrderItemSerializer(write_only=True)
+    products = OrderItemSerializer(write_only=True, many=True)
 
     class Meta:
         model = Order
