@@ -19,7 +19,10 @@ class OrderApiView(ListCreateAPIView):
 
 class OrderConfirmView(APIView):
     def get(self, request, pk):
-
+        order = Order.objects.get(pk=pk)
+        order.status = 'completed'
+        order.save()
+        return Response({'message': 'Вы подтвердили'}, status=200)
 
 
 
