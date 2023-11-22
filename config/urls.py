@@ -25,6 +25,7 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger')),
     path('api/v1/account/', include('apps.account.urls')),
     path('api/v1/', include(router.urls)),
+    path('api/order/', include('apps.order.urls'))
 ]
 
 
