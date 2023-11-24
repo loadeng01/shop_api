@@ -6,10 +6,8 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework import generics
 from django.contrib.auth import get_user_model
-# from .send_mail import send_confirmation_email
 from rest_framework_simplejwt.views import TokenObtainPairView
-# from .send_sms import send_activation_sms
-from .tests import send_confirmation_email, send_activation_sms
+from .tasks import send_confirmation_email, send_activation_sms
 
 User = get_user_model()
 
