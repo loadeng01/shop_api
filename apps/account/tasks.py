@@ -24,7 +24,7 @@ def send_confirmation_email(email, code):
     activation_url = f'http://localhost:8000/api/v1/account/activate/?u={code}'
 
     message = format_html(
-        'Hello, activate your account!'
+        '<h2>Hello, activate your account!</h2>\n'
         'Click on the link to activate'
         "{}"
         "Don't show it anyone",
@@ -33,8 +33,9 @@ def send_confirmation_email(email, code):
 
     send_mail(
         'Hello, activate your account!',
-        message,
+        '',
         'checkemail@gmail.com',
         [email],
         fail_silently=False,
+        html_message=message
     )

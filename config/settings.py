@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'apps.category',
     'apps.product',
     'apps.rating',
-    'apps.order'
+    'apps.order',
+    'apps.logger'
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.middleware.custom_middleware.MyMiddleWare',
+    'apps.middleware.custom_middleware.RequestHandlerMiddleWare'
 ]
 
 ROOT_URLCONF = 'config.urls'

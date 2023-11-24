@@ -6,7 +6,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework.routers import SimpleRouter
 from apps.category.views import CategoryViewSet
-from apps.product.views import ProductViewSet
+from apps.product.views import ProductViewSet, get_hello
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -25,7 +25,8 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger')),
     path('api/v1/account/', include('apps.account.urls')),
     path('api/v1/', include(router.urls)),
-    path('api/order/', include('apps.order.urls'))
+    path('api/order/', include('apps.order.urls')),
+    path('api/hello/', get_hello)
 ]
 
 
