@@ -21,14 +21,15 @@ def send_activation_sms(phone_number, activation_code):
 # @shared_task()
 @app.task()
 def send_confirmation_email(email, code):
-    activation_url = f'http://localhost:8000/api/v1/account/activate/?u={code}'
+    activation_url = f'http://13.51.169.73/api/v1/account/activate/?u={code}'
 
     message = format_html(
         '<h2>Hello, activate your account!</h2>\n'
-        'Click on the link to activate'
-        "{}"
-        "Don't show it anyone",
+        'Click on the word to activate'
+        "<br><a href={}>{}</a></br>"
+        "<p>Don't show it anyone</p>",
         activation_url,
+        'CLICK HERE'
     )
 
     send_mail(
